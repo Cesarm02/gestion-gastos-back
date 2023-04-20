@@ -23,6 +23,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     public Usuario guardarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRols) throws Exception {
         Usuario usuariolocal = usuarioRepositorio.findByUsername(usuario.getUsername());
         if(usuariolocal != null){
+            System.out.println("El usuario ya existe");
             throw new Exception("El usuario ya existe");
         }else{
             for(UsuarioRol rol : usuarioRols){

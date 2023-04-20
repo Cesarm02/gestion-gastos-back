@@ -45,6 +45,10 @@ public class GestionGastosBackApplication implements CommandLineRunner {
 		usuarioRol.setUsuario(usuario);
 		usuarioRols.add(usuarioRol);
 
+		Usuario usuarioExiste = usuarioServicio.obtenerUsuario(usuario.getUsername());
+		if(usuarioExiste!= null)
+			usuarioServicio.eliminarUsuario(usuarioExiste.getId());
+
 		Usuario usuarioGuardado = usuarioServicio.guardarUsuario(usuario, usuarioRols);
 		System.out.println(usuarioGuardado.getUsername());
 	}
