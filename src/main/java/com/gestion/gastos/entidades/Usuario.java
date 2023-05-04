@@ -33,6 +33,7 @@ public class Usuario implements UserDetails {
     private String email;
     private String telefono;
     private int edad;
+    private boolean enabled = true;
     private String perfil;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "usuario")
@@ -63,8 +64,5 @@ public class Usuario implements UserDetails {
         return true;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return false;
-    }
+
 }

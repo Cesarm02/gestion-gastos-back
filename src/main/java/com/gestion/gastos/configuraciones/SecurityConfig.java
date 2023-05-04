@@ -15,7 +15,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 @EnableWebSecurity
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -48,21 +47,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
+        http
                 .cors()
+                .and()
+                .csrf()
                 .disable()
                 .authorizeRequests()
-                //Solo estas rutas a cualquiera
-                .antMatchers("/generate-token", "/usuarios/").permitAll()
-                .antMatchers(HttpMethod.OPTIONS).permitAll()
-                //Las restantes autenticar
-                .anyRequest().authenticated()
+                .antMatchers(HttpMethod.POST, "/generate-token", "/usuarios/")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unathorizedHandler)
                 .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
+
+
 }
