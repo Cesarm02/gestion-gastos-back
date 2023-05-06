@@ -2,6 +2,7 @@ package com.gestion.gastos.servicios.Impl;
 
 import com.gestion.gastos.entidades.Usuario;
 import com.gestion.gastos.entidades.UsuarioRol;
+import com.gestion.gastos.excepciones.UsuarioFoundException;
 import com.gestion.gastos.repositorios.RolRepositorio;
 import com.gestion.gastos.repositorios.UsuarioRepositorio;
 import com.gestion.gastos.servicios.UsuarioServicio;
@@ -24,7 +25,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         Usuario usuariolocal = usuarioRepositorio.findByUsername(usuario.getUsername());
         if(usuariolocal != null){
             System.out.println("El usuario ya existe");
-            throw new Exception("El usuario ya existe");
+            throw new UsuarioFoundException("El usuario ya existe");
         }else{
             for(UsuarioRol rol : usuarioRols){
                 rolRepositorio.save(rol.getRol());
