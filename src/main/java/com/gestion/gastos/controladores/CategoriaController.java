@@ -2,6 +2,7 @@ package com.gestion.gastos.controladores;
 
 import com.gestion.gastos.entidades.Categoria;
 import com.gestion.gastos.servicios.CategoriaService;
+import com.gestion.gastos.util.Utilidades;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -19,10 +20,12 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
+    @Autowired
+    private Utilidades utilidades;
+
     @PostMapping("/")
     public ResponseEntity<Categoria> guardarCategoria(@RequestBody  Categoria categoria){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        categoria.setUsuarioCreacion(authentication.getName());
+        categoria.setUsuarioCreacion(utilidades.obtenerUsuario());
         categoria.setFechaCreacion(new Date());
         Categoria categoriaGuardar = categoriaService.agregarCategoria(categoria);
         return ResponseEntity.ok(categoriaGuardar);
