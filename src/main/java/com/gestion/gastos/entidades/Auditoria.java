@@ -29,6 +29,6 @@ public class Auditoria {
     private String usuarioModificacion;
 
     private String accion;
-    private boolean error;
+    private boolean error = false;
     private String descripcionError;
 }

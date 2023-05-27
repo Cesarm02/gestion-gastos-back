@@ -3,11 +3,8 @@ package com.gestion.gastos.controladores;
 import com.gestion.gastos.entidades.Cuenta;
 import com.gestion.gastos.servicios.CuentaService;
 import com.gestion.gastos.util.Utilidades;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

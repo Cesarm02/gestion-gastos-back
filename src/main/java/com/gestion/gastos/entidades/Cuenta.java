@@ -25,7 +25,7 @@ public class Cuenta {
     private String titulo;
     private String descripcion;
     private String tipo; //efectivo - tarjeta
-
+    private double totalCuenta = 0;
 
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
@@ -39,5 +39,8 @@ public class Cuenta {
     @JsonIgnore
     @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
     private List<Transaccion> transacciones = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Usuario usuario;
 
 }
