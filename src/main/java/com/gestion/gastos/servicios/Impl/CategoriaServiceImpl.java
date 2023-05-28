@@ -1,6 +1,7 @@
 package com.gestion.gastos.servicios.Impl;
 
 import com.gestion.gastos.entidades.Categoria;
+import com.gestion.gastos.entidades.Usuario;
 import com.gestion.gastos.repositorios.CategoriaRepositorio;
 import com.gestion.gastos.servicios.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public List<Categoria> obtenerCategorias() {
-        return categoriaRepositorio.findAll();
+    public List<Categoria> obtenerCategorias(Usuario usuario) {
+        return categoriaRepositorio.findAllByUsuario(usuario);
     }
 
     @Override

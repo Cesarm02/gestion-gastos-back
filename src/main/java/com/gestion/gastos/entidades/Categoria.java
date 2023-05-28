@@ -37,4 +37,7 @@ public class Categoria {
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Transaccion> transacciones = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Usuario usuario;
 }

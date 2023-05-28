@@ -26,6 +26,7 @@ public class Cuenta {
     private String descripcion;
     private String tipo; //efectivo - tarjeta
     private double totalCuenta = 0;
+    private boolean estado = true;
 
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;

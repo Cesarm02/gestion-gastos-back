@@ -24,7 +24,6 @@ public class Transaccion {
     private Date fecha;
     private String descripcion;
     private double valor;
-    private Mes mes;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Cuenta cuenta;

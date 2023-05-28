@@ -1,6 +1,7 @@
 package com.gestion.gastos.servicios.Impl;
 
 import com.gestion.gastos.entidades.Cuenta;
+import com.gestion.gastos.entidades.Usuario;
 import com.gestion.gastos.repositorios.CuentaRepositorio;
 import com.gestion.gastos.servicios.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
-    public List<Cuenta> obtenerCuentas() {
-        return cuentaRepositorio.findAll();
+    public List<Cuenta> obtenerCuentas(Usuario usuario) {
+        return cuentaRepositorio.findAllByUsuario(usuario);
     }
 
     @Override

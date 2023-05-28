@@ -42,6 +42,10 @@ public class Usuario implements UserDetails {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Cuenta> cuentas = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Categoria> categorias = new ArrayList<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Authority> authorities = new HashSet<>();

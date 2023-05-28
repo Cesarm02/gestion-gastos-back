@@ -1,7 +1,10 @@
 package com.gestion.gastos.controladores;
 
+import com.gestion.gastos.dtos.CuentaDTO;
 import com.gestion.gastos.entidades.Cuenta;
+import com.gestion.gastos.entidades.Usuario;
 import com.gestion.gastos.servicios.CuentaService;
+import com.gestion.gastos.servicios.UsuarioServicio;
 import com.gestion.gastos.util.Utilidades;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +25,22 @@ public class CuentaController {
     @Autowired
     private Utilidades utilidades;
 
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
     @GetMapping("/")
     public ResponseEntity<?> obtenerCuentas(){
         List<Cuenta> cuentas = new ArrayList<>();
+        Usuario usuario = usuarioServicio.obtenerUsuario(utilidades.obtenerUsuario());
         try{
-            cuentas = cuentaService.obtenerCuentas();
+            cuentas = cuentaService.obtenerCuentas(usuario);
             if(cuentas.isEmpty()){
-                return ResponseEntity.ok("No hay datos");
+                utilidades.agregarAuditoria("obtenerCuentas", "No existe la cuenta", false);
+                return ResponseEntity.ok("No existe la cuenta");
             }
         }catch (Exception e ){
+            utilidades.agregarAuditoria("obtenerCuentas", e.getMessage(), true);
+
             e.printStackTrace();
         }
         return ResponseEntity.ok(cuentas);
@@ -41,8 +51,10 @@ public class CuentaController {
         Cuenta cuenta = new Cuenta();
         try{
             cuenta = cuentaService.obtenerCuenta(id);
-            if(cuenta == null)
+            if(cuenta == null){
+                utilidades.agregarAuditoria("obtenerCuenta", "Cuenta no encontrada", false);
                 return ResponseEntity.ok("Cuenta no encontrada");
+            }
         }catch (Exception e ){
             e.printStackTrace();
         }
@@ -50,28 +62,43 @@ public class CuentaController {
     }
 
     @PostMapping("/")
-    public Cuenta guardarCuenta(@RequestBody Cuenta cuenta){
-        Cuenta cuentaGuardada = new Cuenta();
+    public Cuenta guardarCuenta(@RequestBody CuentaDTO cuentaDTO){
+        Cuenta cuenta = new Cuenta();
         try{
+            cuenta.setTipo(cuentaDTO.getTipo());
+            cuenta.setTitulo(cuentaDTO.getTitulo());
+            cuenta.setDescripcion(cuentaDTO.getDescripcion());
+            cuenta.setUsuario(usuarioServicio.obtenerUsuario(utilidades.obtenerUsuario()));
             cuenta.setUsuarioCreacion(utilidades.obtenerUsuario());
             cuenta.setFechaCreacion(new Date());
-            cuentaGuardada = cuentaService.agregarCuenta(cuenta);
+            cuenta.setTotalCuenta(cuentaDTO.getTotal());
+            cuenta = cuentaService.agregarCuenta(cuenta);
         }catch (Exception e ){
+            utilidades.agregarAuditoria("guardarCuenta", e.getMessage(), true);
             e.printStackTrace();
         }
-        return cuentaGuardada;
+        return cuenta;
     }
 
     @PutMapping("/")
-    public Cuenta actualiarCuenta(@RequestBody Cuenta cuenta){
+    public Cuenta actualiarCuenta(@RequestBody CuentaDTO cuentaDTO){
+        Cuenta cuenta = new Cuenta();
         try{
+            cuenta = cuentaService.obtenerCuenta(Long.parseLong(cuentaDTO.getId()));
             cuenta.setUsuarioModificacion(utilidades.obtenerUsuario());
             cuenta.setFechaModificacion(new Date());
+            cuenta.setTitulo(cuentaDTO.getTitulo());
+            cuenta.setDescripcion(cuentaDTO.getDescripcion());
+            cuenta.setTitulo(cuentaDTO.getTitulo());
+            cuenta.setTotalCuenta(cuentaDTO.getTotal());
+            cuenta.setEstado(Boolean.parseBoolean(cuentaDTO.getEstado()));
+            cuenta = cuentaService.actualizarCuenta(cuenta);
 
         }catch (Exception e){
+            utilidades.agregarAuditoria("actualiarCuenta", e.getMessage(), true);
             e.printStackTrace();
         }
-        return cuentaService.actualizarCuenta(cuenta);
+        return cuenta;
     }
     @DeleteMapping("/{id}")
     public void eliminarCuenta(@PathVariable("id") long id){

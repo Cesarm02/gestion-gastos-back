@@ -45,8 +45,8 @@ public class TransaccionServiceImpl implements TransaccionService {
     }
 
     @Override
-    public List<Transaccion> obtenerTransaccionPorCuenta(long cuentaId) {
-        return transaccionRepositorio.findByCuenta( cuentaId);
+    public List<Transaccion> obtenerTransaccionPorCuenta(Cuenta cuenta) {
+        return transaccionRepositorio.findAllByCuenta( cuenta);
     }
 
     @Override
