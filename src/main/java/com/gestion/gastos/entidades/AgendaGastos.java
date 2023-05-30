@@ -10,21 +10,22 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "gastosfijos")
+@Table(name = "agenda")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class GastosFijos {
+public class AgendaGastos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long gastosFijosId;
+    private Long agendaGastosId;
 
     private String titulo;
     private Date fecha;
     private double valorEsperado;
     private double valorReal;
+    private double diferencia;
     private boolean estado = true;
     private Mes mes;
     private String descripcion;
@@ -37,5 +38,8 @@ public class GastosFijos {
     private String usuarioCreacion;
     @Column(name = "usuario_modificacion")
     private String usuarioModificacion;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Usuario usuario;
 
 }

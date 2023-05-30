@@ -16,7 +16,7 @@ public interface TransaccionService {
     void eliminarTransaccion(Long id);
 
     List<Transaccion> obtenerTransaccionPorCuenta(Cuenta cuenta);
-    List<Transaccion> obtenerTransaccionPorCategoriaYCuenta(long cuentaId, long categoriaId);
-    List<Transaccion> obtenerTransaccionPorCategoria(long categoriaId);
+    List<Transaccion> obtenerTransaccionPorCategoriaYCuenta(Cuenta cuentaId, Categoria categoriaId);
+    List<Transaccion> obtenerTransaccionPorCategoria(Categoria categoriaId);
 
 }

@@ -50,14 +50,14 @@ public class TransaccionServiceImpl implements TransaccionService {
     }
 
     @Override
-    public List<Transaccion> obtenerTransaccionPorCategoriaYCuenta(long cuentaId, long categoriaId) {
-        return transaccionRepositorio.findByCuentaAndCategoria(cuentaId, categoriaId);
+    public List<Transaccion> obtenerTransaccionPorCategoriaYCuenta(Cuenta cuentaId, Categoria categoriaId) {
+        return transaccionRepositorio.findByAllCuentaAndCategoria(categoriaId, cuentaId);
 
     }
 
     @Override
-    public List<Transaccion> obtenerTransaccionPorCategoria(long categoriaId) {
-        return transaccionRepositorio.findByCategoria(categoriaId);
+    public List<Transaccion> obtenerTransaccionPorCategoria(Categoria categoriaId) {
+        return transaccionRepositorio.findAllByCategoria(categoriaId);
     }
 
 }
