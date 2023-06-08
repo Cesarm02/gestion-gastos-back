@@ -36,11 +36,10 @@ public class CuentaController {
             cuentas = cuentaService.obtenerCuentas(usuario);
             if(cuentas.isEmpty()){
                 utilidades.agregarAuditoria("obtenerCuentas", "No existe la cuenta", false);
-                return ResponseEntity.ok("No existe la cuenta");
+
             }
         }catch (Exception e ){
             utilidades.agregarAuditoria("obtenerCuentas", e.getMessage(), true);
-
             e.printStackTrace();
         }
         return ResponseEntity.ok(cuentas);
@@ -53,7 +52,6 @@ public class CuentaController {
             cuenta = cuentaService.obtenerCuenta(id);
             if(cuenta == null){
                 utilidades.agregarAuditoria("obtenerCuenta", "Cuenta no encontrada", false);
-                return ResponseEntity.ok("Cuenta no encontrada");
             }
         }catch (Exception e ){
             e.printStackTrace();
@@ -91,6 +89,7 @@ public class CuentaController {
             cuenta.setDescripcion(cuentaDTO.getDescripcion());
             cuenta.setTitulo(cuentaDTO.getTitulo());
             cuenta.setTotalCuenta(cuentaDTO.getTotal());
+            cuenta.setTipo(cuentaDTO.getTipo());
             cuenta.setEstado(Boolean.parseBoolean(cuentaDTO.getEstado()));
             cuenta = cuentaService.actualizarCuenta(cuenta);
 

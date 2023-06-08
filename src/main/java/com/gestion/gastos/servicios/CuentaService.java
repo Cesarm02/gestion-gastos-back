@@ -12,4 +12,5 @@ public interface CuentaService {
     List<Cuenta> obtenerCuentas(Usuario usuario);
     Cuenta obtenerCuenta(long id);
     void eliminarCuenta(long id);
+
 }

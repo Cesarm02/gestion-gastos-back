@@ -40,12 +40,12 @@ public class TransaccionController {
             Cuenta cuenta = cuentaService.obtenerCuenta(cuentaId);
             if(cuenta == null){
                 utilidades.agregarAuditoria("obtenerTransaccionesPorCuenta", "La cuenta no existe", false);
-                return ResponseEntity.ok("La cuenta no existe");
+                //return ResponseEntity.ok("La cuenta no existe");
             }
             transaccions = transaccionService.obtenerTransaccionPorCuenta(cuenta);
             if(transaccions.isEmpty()){
                 utilidades.agregarAuditoria("obtenerTransaccionesPorCuenta", "La cuenta no tiene transacciones", false);
-                return ResponseEntity.ok("La cuenta no tiene transacciones");
+                //return ResponseEntity.ok("La cuenta no tiene transacciones");
             }
 
         }catch (Exception e){
@@ -114,12 +114,12 @@ public class TransaccionController {
             Categoria categoria = categoriaService.obtenerCategoria(categoriaId);
             if(categoria == null){
                 utilidades.agregarAuditoria("obtenerPorCategoria", "La categoria no existe", false);
-                return  ResponseEntity.ok("La categoria no existe");
+                //return  ResponseEntity.ok("La categoria no existe");
             }
             transaccions = transaccionService.obtenerTransaccionPorCategoria(categoria);
             if(transaccions.isEmpty()){
                 utilidades.agregarAuditoria("obtenerPorCategoria", "La categoria no tiene transacciones", false);
-                return ResponseEntity.ok("La categoria no tiene transacciones");
+                //return ResponseEntity.ok("La categoria no tiene transacciones");
 
             }
         }catch(Exception e){
@@ -136,17 +136,17 @@ public class TransaccionController {
             Cuenta cuenta = cuentaService.obtenerCuenta(cuentaId);
             if(cuenta == null){
                 utilidades.agregarAuditoria("obtenerTransaccionesPorCuenta", "La cuenta no existe", false);
-                return ResponseEntity.ok("La cuenta no existe");
+                //return ResponseEntity.ok("La cuenta no existe");
             }
             Categoria categoria = categoriaService.obtenerCategoria(categoriaId);
             if(categoria == null){
                 utilidades.agregarAuditoria("obtenerPorCuentaCategoria", "La categoria no existe", false);
-                return  ResponseEntity.ok("La categoria no existe");
+                //return  ResponseEntity.ok("La categoria no existe");
             }
             transaccions = transaccionService.obtenerTransaccionPorCategoriaYCuenta(cuenta, categoria);
             if(transaccions.isEmpty()){
                 utilidades.agregarAuditoria("obtenerPorCuentaCategoria", "La consulta no retorna datos", false);
-                return  ResponseEntity.ok("La consulta no retorna datos");
+                //return  ResponseEntity.ok("La consulta no retorna datos");
             }
         }catch (Exception e){
             utilidades.agregarAuditoria("obtenerPorCuentaCategoria", e.getMessage(), true);
@@ -162,7 +162,7 @@ public class TransaccionController {
             Transaccion transaccionBorrar = transaccionService.obtenerTransaccion(id);
             if(transaccionBorrar == null){
                 mensaje = "La transaccion no existe";
-                return mensaje;
+                //return mensaje;
             }
             Cuenta cuenta = cuentaService.obtenerCuenta(transaccionBorrar.getCuenta().getCuentaId());
             cuenta.setFechaModificacion(new Date());
