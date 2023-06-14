@@ -43,7 +43,7 @@ public class AgendaGastoServiceImpl implements AgendaGastosService {
         if(agendaGastos.getValorEsperado() == 0){
             agendaGastos.setValorEsperado(agendaGastos.getValorReal());
         }
-        agendaGastos.setDiferencia(agendaGastos.getValorEsperado() - agendaGastos.getValorReal() );
+        agendaGastos.setDiferencia( agendaGastos.getValorReal() - agendaGastos.getValorEsperado() );
         agendaGastos.setFechaCreacion(new Date());
         agendaGastos.setUsuario(usuarioServicio.obtenerUsuario(utilidades.obtenerUsuario()));
         agendaGastos.setFecha(agendaGastosDto.getFecha());
@@ -68,7 +68,7 @@ public class AgendaGastoServiceImpl implements AgendaGastosService {
         if(agendaGastosDto.getValorEsperado() == 0){
             agendaGastosAntiguo.setValorEsperado(agendaGastosDto.getValorReal());
         }
-        agendaGastosAntiguo.setDiferencia(agendaGastosAntiguo.getValorEsperado() - agendaGastosAntiguo.getValorReal());
+        agendaGastosAntiguo.setDiferencia(agendaGastosAntiguo.getValorReal() - agendaGastosAntiguo.getValorEsperado());
         agendaGastosAntiguo.setMes(agendaGastosDto.getMes());
         agendaGastosAntiguo.setFechaModificacion(new Date());
         AgendaGastos agendaGastos = agendaGastosRepositorio.save(agendaGastosAntiguo);

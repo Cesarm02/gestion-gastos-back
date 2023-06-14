@@ -60,4 +60,9 @@ public class TransaccionServiceImpl implements TransaccionService {
         return transaccionRepositorio.findAllByCategoria(categoriaId);
     }
 
+    @Override
+    public Transaccion obtenerPorId(long id) {
+        return  transaccionRepositorio.findById(id).get();
+    }
+
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class HistoricoServiceImpl implements HistoricoSimulacionService {
@@ -55,6 +56,12 @@ public class HistoricoServiceImpl implements HistoricoSimulacionService {
         historicoSimulacion.setUsuario(usuarioServicio.obtenerUsuario(utilidades.obtenerUsuario()));
         historicoSimulacionRepositorio.save(historicoSimulacion);
         return resultado;
+    }
+
+    @Override
+    public List<HistoricoSimulacion> historico() {
+        List<HistoricoSimulacion> historicoSimulacions = historicoSimulacionRepositorio.findAllByUsuario(usuarioServicio.obtenerUsuario(utilidades.obtenerUsuario()));
+        return historicoSimulacions;
     }
 
 

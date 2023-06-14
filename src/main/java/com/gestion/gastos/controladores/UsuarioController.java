@@ -5,10 +5,13 @@ import com.gestion.gastos.entidades.Usuario;
 import com.gestion.gastos.entidades.UsuarioRol;
 import com.gestion.gastos.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -49,6 +52,17 @@ public class UsuarioController {
     @DeleteMapping("/{usuarioId}")
     public void eliminarUsuario(@PathVariable("usuarioId") Long usuarioId){
         usuarioServicio.eliminarUsuario(usuarioId);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<?> obtenerUsuarios(){
+        List<Usuario> usuarios = new ArrayList<>();
+        try{
+            usuarios = usuarioServicio.obtenerUsuarios();
+        }catch (Exception e ){
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(usuarios);
     }
 
 

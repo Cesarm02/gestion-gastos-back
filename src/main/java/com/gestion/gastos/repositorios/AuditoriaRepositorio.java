@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface AuditoriaRepositorio extends JpaRepository<Auditoria, Long> {
     List<Auditoria> findByUsuarioCreacion(String usuarioCreacion);
+
+    List<Auditoria> findByUsuarioCreacionAndError(String usuarioCreacion, boolean error);
+
 }

@@ -9,6 +9,7 @@ import com.gestion.gastos.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -44,5 +45,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public void eliminarUsuario(Long userId) {
         usuarioRepositorio.deleteById(userId);
+    }
+
+    @Override
+    public List<Usuario> obtenerUsuarios() {
+        return usuarioRepositorio.findAll();
     }
 }

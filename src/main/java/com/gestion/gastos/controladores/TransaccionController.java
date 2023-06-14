@@ -156,7 +156,7 @@ public class TransaccionController {
     }
 
     @DeleteMapping("/{id}")
-    public String eliminarTransaccion(@PathVariable("id") long id){
+    public ResponseEntity<?> eliminarTransaccion(@PathVariable("id") long id){
         String mensaje = "";
         try{
             Transaccion transaccionBorrar = transaccionService.obtenerTransaccion(id);
@@ -173,11 +173,24 @@ public class TransaccionController {
             transaccionService.eliminarTransaccion(id);
             mensaje = "Eliminado correctamente";
         }catch (Exception e){
-            utilidades.agregarAuditoria("eliminarTransaccion", e.getMessage(), false);
+            utilidades.agregarAuditoria("eliminarTransaccion", e.getMessage(), true);
             e.printStackTrace();
         }
         utilidades.agregarAuditoria("eliminarTransaccion", "Elimino la transaccion # " + id + " fecha: " + new Date(), true);
-        return mensaje;
+        return ResponseEntity.ok(mensaje);
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<?> obtenerPorId(@PathVariable("id") long id){
+        Transaccion transaccion = new Transaccion();
+        try{
+            transaccion = transaccionService.obtenerPorId(id);
+        }catch (Exception e ){
+            utilidades.agregarAuditoria("obtenerPorId", e.getMessage(), true);
+            e.printStackTrace();
+
+        }
+        return ResponseEntity.ok(transaccion);
     }
 
 }

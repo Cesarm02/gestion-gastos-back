@@ -12,5 +12,6 @@ public enum Mes {
     SEPTIEMBRE,
     OCTUBRE,
     NOVIEMBRE,
-    DICIEMBRE
+    DICIEMBRE,
+    NAN
 }

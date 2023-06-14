@@ -18,5 +18,6 @@ public interface TransaccionService {
     List<Transaccion> obtenerTransaccionPorCuenta(Cuenta cuenta);
     List<Transaccion> obtenerTransaccionPorCategoriaYCuenta(Cuenta cuentaId, Categoria categoriaId);
     List<Transaccion> obtenerTransaccionPorCategoria(Categoria categoriaId);
+    Transaccion obtenerPorId(long id);
 
 }

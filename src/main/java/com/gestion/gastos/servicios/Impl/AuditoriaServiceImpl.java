@@ -28,4 +28,9 @@ public class AuditoriaServiceImpl implements AuditoriaService {
     public List<Auditoria> listAuditoriaPorUsuario(String username) {
         return auditoriaRepositorio.findByUsuarioCreacion(username);
     }
+
+    @Override
+    public List<Auditoria> listAuditoriaPorUsuarioError(String username) {
+        return auditoriaRepositorio.findByUsuarioCreacionAndError(username, true);
+    }
 }

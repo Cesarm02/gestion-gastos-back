@@ -8,4 +8,5 @@ public interface AuditoriaService {
     public void agregarAuditoria(Auditoria auditoria);
     public List<Auditoria> listAuditoria();
     public List<Auditoria> listAuditoriaPorUsuario(String username);
+    public List<Auditoria> listAuditoriaPorUsuarioError(String username);
 }
