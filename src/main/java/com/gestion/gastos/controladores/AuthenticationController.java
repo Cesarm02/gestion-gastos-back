@@ -3,6 +3,8 @@ package com.gestion.gastos.controladores;
 import com.gestion.gastos.configuraciones.JwtUtils;
 import com.gestion.gastos.entidades.JwtRequest;
 import com.gestion.gastos.entidades.JwtResponse;
+import com.gestion.gastos.entidades.Usuario;
+import com.gestion.gastos.excepciones.UsuarioNotFoundException;
 import com.gestion.gastos.servicios.Impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
+@CrossOrigin("*")
+
 public class AuthenticationController {
 
     @Autowired
@@ -29,7 +35,7 @@ public class AuthenticationController {
     public ResponseEntity<JwtResponse> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         try{
             autenticar(jwtRequest.getUsername(), jwtRequest.getPassword());
-        }catch (Exception e) {
+        }catch (UsuarioNotFoundException e) {
             e.printStackTrace();
             throw new Exception("Usuario no encontrado");
         }
@@ -47,5 +53,10 @@ public class AuthenticationController {
         }catch (BadCredentialsException e){
             throw new Exception("Credenciales invalidas " + e.getMessage());
         }
+    }
+
+    @GetMapping("/actual-usuario")
+    public Usuario obtenerUsuarioActual(Principal principal){
+        return (Usuario) this.userDetailService.loadUserByUsername(principal.getName());
     }
 }

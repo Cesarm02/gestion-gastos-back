@@ -2,12 +2,14 @@ package com.gestion.gastos.servicios.Impl;
 
 import com.gestion.gastos.entidades.Usuario;
 import com.gestion.gastos.entidades.UsuarioRol;
+import com.gestion.gastos.excepciones.UsuarioFoundException;
 import com.gestion.gastos.repositorios.RolRepositorio;
 import com.gestion.gastos.repositorios.UsuarioRepositorio;
 import com.gestion.gastos.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -24,7 +26,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         Usuario usuariolocal = usuarioRepositorio.findByUsername(usuario.getUsername());
         if(usuariolocal != null){
             System.out.println("El usuario ya existe");
-            throw new Exception("El usuario ya existe");
+            throw new UsuarioFoundException("El usuario ya existe");
         }else{
             for(UsuarioRol rol : usuarioRols){
                 rolRepositorio.save(rol.getRol());
@@ -43,5 +45,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public void eliminarUsuario(Long userId) {
         usuarioRepositorio.deleteById(userId);
+    }
+
+    @Override
+    public List<Usuario> obtenerUsuarios() {
+        return usuarioRepositorio.findAll();
     }
 }

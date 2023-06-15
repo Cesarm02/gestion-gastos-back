@@ -3,6 +3,7 @@ package com.gestion.gastos.servicios;
 import com.gestion.gastos.entidades.Usuario;
 import com.gestion.gastos.entidades.UsuarioRol;
 
+import java.util.List;
 import java.util.Set;
 
 public interface UsuarioServicio {
@@ -13,5 +14,6 @@ public interface UsuarioServicio {
 
     public void eliminarUsuario(Long userId);
 
+    public List<Usuario> obtenerUsuarios();
 
 }
