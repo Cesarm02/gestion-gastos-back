@@ -24,7 +24,7 @@ public class HistoricoSimulacion {
     @Column(nullable = true)
     private double meta;
     //Tiempo en meses
-    @Column(nullable = true)
+    @Column(nullable = true, length = 5)
     private int tiempoMeses;
     @Column(nullable = true)
     private double ahorroMensual;

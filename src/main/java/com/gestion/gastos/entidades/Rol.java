@@ -20,7 +20,7 @@ public class Rol {
 
     @Id
     private long rolId;
-
+    @Column(length = 50)
     private String nombre;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "rol")

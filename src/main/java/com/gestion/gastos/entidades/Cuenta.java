@@ -21,9 +21,11 @@ public class Cuenta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cuentaId;
-
+    @Column(length = 100)
     private String titulo;
+    @Column(length = 255)
     private String descripcion;
+    @Column(length = 80)
     private String tipo; //efectivo - tarjeta
     private double totalCuenta = 0;
     private boolean estado = true;

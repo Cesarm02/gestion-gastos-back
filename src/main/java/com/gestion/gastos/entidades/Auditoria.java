@@ -28,6 +28,7 @@ public class Auditoria {
     @Column(name = "usuario_modificacion")
     private String usuarioModificacion;
 
+    @Column(length = 80)
     private String accion;
     private boolean error = false;
     private String descripcionError;

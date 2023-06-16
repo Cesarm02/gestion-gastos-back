@@ -21,6 +21,7 @@ public class AgendaGastos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long agendaGastosId;
 
+    @Column(length = 100)
     private String titulo;
     private Date fecha;
     private double valorEsperado;
@@ -28,6 +29,7 @@ public class AgendaGastos {
     private double diferencia;
     private boolean estado = true;
     private Mes mes;
+    @Column(length = 255)
     private String descripcion;
 
     @Column(name = "fecha_creacion")
