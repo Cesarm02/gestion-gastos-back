@@ -23,13 +23,17 @@ public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
+    @Column(length = 50)
     private String username;
     private String password;
+    @Column(length = 50)
     private String nombre;
+    @Column(length = 50)
     private String apellido;
     private String email;
     private String telefono;
+    @Column(length = 3)
     private int edad;
     private boolean enabled = true;
     private String perfil;

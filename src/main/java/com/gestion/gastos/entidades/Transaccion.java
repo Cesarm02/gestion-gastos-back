@@ -22,6 +22,7 @@ public class Transaccion {
     private Long transaccionId;
 
     private Date fecha;
+    @Column(length = 255)
     private String descripcion;
     private double valor;
 

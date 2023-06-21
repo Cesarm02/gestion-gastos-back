@@ -20,7 +20,9 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoriaId;
 
+    @Column(length = 100)
     private String titulo;
+    @Column(length = 255)
     private String descripcion;
 
     private boolean estado = true;
