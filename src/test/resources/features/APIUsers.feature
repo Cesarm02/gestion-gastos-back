@@ -3,14 +3,18 @@
 @APIUSERS
 Característica: Validación de API usuarios
 
+  Antecedentes: Generación de token para servicios API User
+    Dado que Juan necesita obtener un token para autenticarse de forma exitosa
+    Entonces  deberá consumir obtener un token de forma correcta
+
 @POST
 Escenario: Agregar exitosamente un usuario
 Dado que Juan desea utilizar la API de usuarios
 Cuando el quiera agregar un usuario:
-|firstname|lastname|email|status|
-|Juan     |Gutierrez|juangoxx@hotmail.com|ACTIVO|
-|Cesar     |Mesa|mesa@hotmail.com|ACTIVO|
-|Cleo     |Gutierrez|cleo@hotmail.com|ACTIVO|
+|nombre|apellido|email|activo|edad|username|
+|Juan     |Gutierrez|juangoxx@hotmail.com|1|24|juangoxx|
+|Steven     |Laguna|laguna@hotmail.com|0| 23  |tatuco|
+|Cleo     |Gutierrez|cleo@hotmail.com|1|  22  |cleo|
 Entonces debería poder hacerlo
 
 @GETALL

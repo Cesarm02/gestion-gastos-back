@@ -36,5 +36,35 @@ public class StepDefinitions {
 
     @Entonces("debería ver una lista con cada estudiante")
     public void deberíaVerUnaListaConCadaEstudiante() {
+        
+    }
+
+    @Cuando("el quiera eliminar el estudiante con el id {int}")
+    public void elQuieraEliminarElEstudianteConElId(int arg0) {
+        
+    }
+
+    @Entonces("no deberá ver más ese estudiante al consultarlo nuevamente")
+    public void noDeberáVerMásEseEstudianteAlConsultarloNuevamente() {
+        
+    }
+
+    @Cuando("el quiera consultar un estudiante por id")
+    public void elQuieraConsultarUnEstudiantePorId() {
+        
+    }
+
+    @Entonces("deberá obtener la información de ese estudiante")
+    public void deberáObtenerLaInformaciónDeEseEstudiante() {
+        
+    }
+
+    @Dado("que Juan necesita obtener un token para autenticarse de forma exitosa")
+    public void queJuanNecesitaObtenerUnTokenParaAutenticarseDeFormaExitosa() {
+        
+    }
+
+    @Entonces("deberá consumir obtener un token de forma correcta")
+    public void deberáConsumirObtenerUnTokenDeFormaCorrecta() {
     }
 }
