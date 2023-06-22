@@ -1,19 +1,27 @@
 package com.gestion.gastos.stepdefinitions;
 
-import com.gestion.gastos.configuraciones.ConsumerServices;
+import com.gestion.gastos.consumers.ConsumerAddUser;
+import com.gestion.gastos.consumers.ConsumerGetToken;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
+import io.cucumber.java.es.Y;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.http.ResponseEntity;
+
+import java.net.URISyntaxException;
 
 public class StepDefinitions {
     private ResponseEntity<String> response;
     Log LOGGER = LogFactory.getLog(StepDefinitions.class);
-    private ConsumerServices studentImp;
+    private String token;
+
+
 
     @Dado("que Juan desea utilizar la API de usuarios")
     public void queJuanDeseaUtilizarLaApiDeUsuarios(){
@@ -22,7 +30,17 @@ public class StepDefinitions {
 
     @Cuando("el quiera agregar un usuario:")
     public void elQuieraAgregarUnUsuario(DataTable users) {
-        Assertions.assertNull(users);
+        ConsumerAddUser consumerAddUser = new ConsumerAddUser();
+        users.asLists().subList(1,users.asLists().size())
+                .forEach(user -> {
+                    try {
+                        System.out.println("Resultado.. "+consumerAddUser.addUser(user).getBody());
+
+                    } catch (URISyntaxException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
     }
 
     @Entonces("debería poder hacerlo")
@@ -59,12 +77,12 @@ public class StepDefinitions {
         
     }
 
-    @Dado("que Juan necesita obtener un token para autenticarse de forma exitosa")
-    public void queJuanNecesitaObtenerUnTokenParaAutenticarseDeFormaExitosa() {
-        
-    }
 
-    @Entonces("deberá consumir obtener un token de forma correcta")
-    public void deberáConsumirObtenerUnTokenDeFormaCorrecta() {
+    @Y("se autentico correctamente")
+    public void seAutenticoCorrectamente() throws URISyntaxException, JSONException {
+        ConsumerGetToken getToken = new ConsumerGetToken("prueba","prueba");
+        JSONObject response = new JSONObject(getToken.getToken().getBody());
+        this.token = response.getString("token");
+        System.out.println("token... "+this.token);
     }
 }
